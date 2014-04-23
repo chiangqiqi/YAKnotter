@@ -64,7 +64,8 @@ private:
     QSlider *createSlider();
 
     GLWidget *glWidget;
-    QPushButton *button;
+    QPushButton *button1;
+    QPushButton *button2;
     QSlider *xSlider;
     QSlider *ySlider;
     QSlider *zSlider;

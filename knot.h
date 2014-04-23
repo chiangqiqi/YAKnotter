@@ -7,6 +7,7 @@
 #include <QGLShaderProgram>
 
 #include "segment.h"
+#include "BezierCurve.h"
 
 const double H = 1.0;
 const double ALPHA = 4;
@@ -29,6 +30,7 @@ public:
     void evolve();
     void init();
     void draw(QGLShaderProgram *program);
+    void drawCurve();
 
 private:
     bool safeQ();

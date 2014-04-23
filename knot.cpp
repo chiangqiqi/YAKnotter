@@ -165,3 +165,28 @@ void Knot::draw(QGLShaderProgram *program){
 
     glDrawElements(GL_LINE_LOOP,N,GL_UNSIGNED_INT,0);
 }
+
+
+void Knot::drawCurve(){
+    BezierCurve<QVector3D> curve;
+//    curve.addControlPoint(QVector3D(1,0,0) , QVector3D(1,3,0), QVector3D(0,1,0));
+//    curve.addControlPoint(QVector3D(0,.3,0) , QVector3D(3,1,0), QVector3D(0,.1,0));
+//    curve.addControlPoint(QVector3D(1,0,0) , QVector3D(2,2,0), QVector3D(0,1,0));
+
+    for(auto iter = data.begin(); iter != data.end()-1; iter++){
+        QVector3D p0 = *iter;
+        QVector3D p1 = *(iter+1);
+
+        //this segment is from po to p1
+        curve.addControlPoint(0.25*p1 + 0.75*p0, (p0+p1)/2, 0.25*p0 + 0.75*p1);
+    }
+
+    QVector3D p0 = data.back();
+    QVector3D p1 = *data.begin();
+    curve.addControlPoint(0.25*p1 + 0.75*p0, (p0+p1)/2, 0.25*p0 + 0.75*p1);
+    p0 = *data.begin();
+    p1 = *(data.begin() + 1);
+    curve.addControlPoint(0.25*p1 + 0.75*p0, (p0+p1)/2, 0.25*p0 + 0.75*p1);
+
+    curve.draw();
+}

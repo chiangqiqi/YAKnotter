@@ -46,8 +46,7 @@
 #include <QMatrix4x4>
 #include "knot.h"
 
-class QtLogo;
-
+enum LineType {POLY, CURVE};
 //! [0]
 class GLWidget : public QGLWidget, protected QGLFunctions
 {
@@ -61,6 +60,8 @@ public:
     QSize sizeHint() const;
 
     void rotateLeft(int angle);
+
+
 //! [0]
 
 //! [1]
@@ -70,12 +71,12 @@ public slots:
     void setZRotation(int angle);
 
     void bianxing();
+    void changeLineType();
 
 signals:
     void xRotationChanged(int angle);
     void yRotationChanged(int angle);
     void zRotationChanged(int angle);
-
 
 //! [1]
 
@@ -110,6 +111,8 @@ private:
     QQuaternion rotation;
 
     double z;
+
+    LineType lineType;
 };
 //! [3]
 

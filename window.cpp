@@ -51,7 +51,8 @@ Window::Window()
     xSlider = createSlider();
     ySlider = createSlider();
     zSlider = createSlider();
-    button = new QPushButton("&Evolve", this);
+    button1 = new QPushButton("&Evolve", this);
+    button2 = new QPushButton("&ToCurve", this);
 
     connect(xSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setXRotation(int)));
     connect(glWidget, SIGNAL(xRotationChanged(int)), xSlider, SLOT(setValue(int)));
@@ -59,23 +60,28 @@ Window::Window()
     connect(glWidget, SIGNAL(yRotationChanged(int)), ySlider, SLOT(setValue(int)));
     connect(zSlider, SIGNAL(valueChanged(int)), glWidget, SLOT(setZRotation(int)));
     connect(glWidget, SIGNAL(zRotationChanged(int)), zSlider, SLOT(setValue(int)));
-    connect(button,SIGNAL(released()),glWidget,SLOT(bianxing()));
+    connect(button1,SIGNAL(released()),glWidget,SLOT(bianxing()));
+    connect(button2,SIGNAL(released()),glWidget,SLOT(changeLineType()));
 //! [0]
 
 //! [1]
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addWidget(glWidget);
-    mainLayout->addWidget(xSlider);
-    mainLayout->addWidget(ySlider);
-    mainLayout->addWidget(zSlider);
-    mainLayout->addWidget(button);
+//    mainLayout->addWidget(xSlider);
+//    mainLayout->addWidget(ySlider);
+//    mainLayout->addWidget(zSlider);
+    QVBoxLayout *buttonsLayout = new QVBoxLayout;
+    buttonsLayout->addWidget(button1);
+    buttonsLayout->addWidget(button2);
+    mainLayout->addItem(buttonsLayout);
+
 
     setLayout(mainLayout);
 
     xSlider->setValue(15 * 16);
     ySlider->setValue(345 * 16);
     zSlider->setValue(0 * 16);
-    setWindowTitle(tr("Hello GL"));
+    setWindowTitle(tr("Knotter"));
 }
 //! [1]
 

@@ -6,13 +6,15 @@ HEADERS       = glwidget.h \
                 qtlogo.h \
     knot.h \
     segment.h \
-    paintwidget.h
+    paintwidget.h \
+    BezierCurve.h
 SOURCES       = glwidget.cpp \
                 main.cpp \
                 window.cpp \
                 knot.cpp \
                 segment.cpp \
-    paintwidget.cpp
+    paintwidget.cpp \
+    BezierCurve.inl
 QT           += opengl widgets
 
 QMAKE_CXXFLAGS += -std=c++11

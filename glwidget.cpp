@@ -61,6 +61,7 @@ GLWidget::GLWidget(QWidget *parent)
 
     qtGreen = QColor::fromCmykF(0.40, 0.0, 1.0, 0.0);
     qtPurple = QColor::fromCmykF(0.39, 0.39, 0.0, 0.0);
+    lineType = POLY;
 }
 //! [0]
 
@@ -162,9 +163,13 @@ void GLWidget::paintGL()
 
     // Set modelview-projection matrix
     program.setUniformValue("mvp_matrix", projection * matrix);
-
-    knot ->init();
-    knot->draw(&program);
+    if(lineType == POLY){
+        knot ->init();
+        knot->draw(&program);
+    }
+    else if(lineType == CURVE){
+        knot->drawCurve();
+    }
 }
 //! [7]
 
@@ -248,6 +253,15 @@ void GLWidget::bianxing(){
     for (int i = 0; i < 5; i++){
         knot->evolve();
     }
+
+    updateGL();
+}
+
+void GLWidget::changeLineType(){
+    if(lineType == POLY)
+        lineType = CURVE;
+    else if(lineType == CURVE)
+        lineType = POLY;
 
     updateGL();
 }
